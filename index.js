@@ -12,8 +12,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  return res.json({ msg: "hi" });
+  return res.json({ msg: "Welcome to the Adbrovz API server 🚀" });
 });
+
 app.use("/api/auth", authRouter);
 app.use("/api/promo", promoRoutes);
 
