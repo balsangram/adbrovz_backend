@@ -1,6 +1,7 @@
 import express from "express";
 import promoRoutes from "./src/routes/promo.routes.js";
 import authRouter from "./src/routes/auth.routes.js";
+import userAuthRouter from "./src/routes/user.routes.js";
 import { PORT } from "./src/config/index.js";
 import cors from "cors";
 import { dbConnect } from "./src/database/index.js";
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/userAuth", userAuthRouter);
 app.use("/api/promo", promoRoutes);
 
 dbConnect();
