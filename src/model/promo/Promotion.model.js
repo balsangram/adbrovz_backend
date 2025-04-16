@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const promoSchema = new Schema(
+const promotionSchema = new Schema(
   {
     code: { type: String },
     promo_name: { type: String },
@@ -23,6 +23,7 @@ const promoSchema = new Schema(
     from_date_time: { type: Date },
     to_date_time: { type: Date },
     totalcost: { type: Number },
+    
     vs_public: { type: Boolean, default: false },
     vs_featured: { type: Boolean, default: false },
     vs_reappear: { type: Boolean, default: false },
@@ -33,13 +34,19 @@ const promoSchema = new Schema(
     email: { type: String },
     advertisement_type: {
       type: String,
-      enum: ["banner", "video", "other"],
-      default: "other",
+      enum: ["Accept", "Reject", "Review",""],
+      default: "",
     },
+
+    // request_status: {
+    //   type: Number,
+    //   enum: [0, 1, 2, 3],
+    //   default: 0,
+    // },
     request_status: {
-      type: Number,
-      enum: [0, 1, 2, 3],
-      default: 0,
+      type: String,
+      enum: ["pending", "approved", "rejected", "delete"],
+      default: "pending",
     },
     expiry_status: { type: Boolean, default: false },
     requested_by: { type: Schema.Types.ObjectId, ref: "User" },
@@ -54,6 +61,6 @@ const promoSchema = new Schema(
   { timestamps: true }
 );
 
-const Promo = mongoose.model("Promo", promoSchema);
+const Promotion = mongoose.model("Promotion", promotionSchema);
 
-export default Promo;
+export default Promotion;

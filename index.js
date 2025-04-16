@@ -6,6 +6,7 @@ import { PORT } from "./src/config/index.js";
 import cors from "cors";
 import { dbConnect } from "./src/database/index.js";
 import chalk from "chalk";
+import errorHandler from "./src/middleware/errorHandler.js";
 const app = express();
 
 app.use(cors());
@@ -19,6 +20,9 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/userAuth", userAuthRouter);
 app.use("/api/promo", promoRoutes);
+
+// Error handler
+app.use(errorHandler);
 
 dbConnect();
 app.listen(PORT, () =>

@@ -7,6 +7,9 @@ const userSchema = new Schema(
     name: { type: String },
     phone: { type: String },
     password: { type: String },
+    // ===
+    
+    // ===
     date_of_birth: { type: String },
     gender: {
       type: String,

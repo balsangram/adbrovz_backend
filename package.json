@@ -4,12 +4,11 @@
   "description": "adbrovz",
   "main": "index.js",
   "type": "module",
-"scripts": {
-  "dev": "nodemon index.js",
-  "start": "node index.js",
-  "seed:admin": "node src/seeds/seedAdmin.js"
-}
-,
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "seed:admin": "node src/seeds/seedAdmin.js"
+  },
   "keywords": [
     "adbrovz"
   ],

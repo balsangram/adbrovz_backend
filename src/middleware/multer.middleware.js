@@ -1,20 +1,7 @@
-const multer = require('multer');
+import multer from "multer";
 
-// Storage config (optional)
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Folder to store files
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname); // Rename file
-  }
-});
+const storage = multer.memoryStorage(); // or diskStorage if you want to store files
 
-// Initialize middleware
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
-// Using as middleware in a route
-app.post('/upload', upload.single('myFile'), (req, res) => {
-  console.log(req.file); // The uploaded file
-  res.send('File uploaded!');
-});
+export default upload;

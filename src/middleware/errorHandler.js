@@ -1,4 +1,5 @@
 // src/middleware/errorHandler.js
+import chalk from "chalk";
 
 // Custom error class to handle different status codes and messages
 class AppError extends Error {
@@ -14,10 +15,10 @@ class AppError extends Error {
 const errorHandler = (err, req, res, next) => {
   if (err instanceof AppError) {
     // Custom error handling for operational errors
-    console.error(`${chalk.bgRed.bold("🔥 Operational Error:", err.stack)}`);
+    console.error(`${chalk.red.bold("🔥 Operational Error:", err.stack)}`);
   } else {
     // Handling unknown errors
-    console.error(`${chalk.bgRed.bold("🔥 Unknown Error:", err.stack)}`);
+    console.error(`${chalk.red.bold("🔥 Unknown Error:", err.stack)}`);
   }
 
   res.status(err.statusCode || 500).json({
