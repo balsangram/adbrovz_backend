@@ -5,10 +5,10 @@ const userSchema = new Schema(
     photo: { type: String },
     nick_name: { type: String },
     name: { type: String },
-    phone: { type: String },
+    phone: { type: String, unique: true, required: true },
     password: { type: String },
     // ===
-    
+
     // ===
     date_of_birth: { type: String },
     gender: {
@@ -41,6 +41,8 @@ const userSchema = new Schema(
     business_latln: { type: String },
     business_email: { type: String },
     profession: { type: String },
+
+    hes_referral: { type: Boolean },
 
     // Role & privacy settings
     role: { type: String, default: "user" }, // could be 'user', 'admin', etc.

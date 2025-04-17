@@ -4,7 +4,7 @@ import { JWT_SECRET } from "../../config/index.js"; // JWT secret from your conf
 import { AppError } from "../../middleware/errorHandler.js";
 import User from "../../model/users.model.js"; // adjust path as needed
 import chalk from "chalk"; // Import chalk for error styling
-import PromoPhoneNo from "../../model/promo/PromotionPhoneNo.model.js";
+// import PromoPhoneNo from "../../model/promo/PromotionPhoneNo.model.js";
 
 // Utility to generate a 10-digit referral code
 const generateReferralCode = () => {
@@ -28,7 +28,8 @@ const generateReferralCode = () => {
 // register user
 export const userRegister = async (req, res, next) => {
   try {
-    const { nick_name, phone, password, reffured_referral_id } = req.body;
+    const { nick_name, phone, password, reffured_referral_id, hes_referral } =
+      req.body;
 
     if (!nick_name || !phone || !password) {
       return next(new AppError(chalk.red.bold("All fields are required"), 400));
@@ -56,10 +57,7 @@ export const userRegister = async (req, res, next) => {
       password: hashedPassword,
       referral_id,
       reffured_referral_id: reffured_referral_id || "",
-    });
-
-    const phoneNo = await PromoPhoneNo.create({
-      phone,
+      hes_referral,
     });
 
     res.status(201).json({
@@ -121,7 +119,7 @@ export const checkPhoneNo = async (req, res, next) => {
     if (!phone) {
       return next(new AppError(chalk.red.bold("nomber not found"), 404));
     }
-    const isPhoneNo = await PromoPhoneNo.findOne({phone});
+    const isPhoneNo = await User.findOne({ phone });
     if (isPhoneNo) {
       res.status(200).json({ message: "already store" });
     } else {

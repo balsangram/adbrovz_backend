@@ -23,7 +23,7 @@ const promotionSchema = new Schema(
     from_date_time: { type: Date },
     to_date_time: { type: Date },
     totalcost: { type: Number },
-    
+
     vs_public: { type: Boolean, default: false },
     vs_featured: { type: Boolean, default: false },
     vs_reappear: { type: Boolean, default: false },
@@ -34,9 +34,10 @@ const promotionSchema = new Schema(
     email: { type: String },
     advertisement_type: {
       type: String,
-      enum: ["Accept", "Reject", "Review",""],
+      enum: ["Accept", "Reject", "Review", ""],
       default: "",
     },
+    
 
     // request_status: {
     //   type: Number,
