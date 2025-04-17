@@ -1,7 +1,12 @@
 import { Router } from "express";
 import { createPromotion } from "../controller/promo/promotion.controller.js";
 import upload from "../middleware/multer.middleware.js";
-import { newAdvertisement } from "../controller/promo/advertisement.controller.js";
+import {
+  AcceptAdvertisement,
+  newAdvertisement,
+  RejectedAdvertisement,
+  ReviewAdvertisement,
+} from "../controller/promo/advertisement.controller.js";
 
 const router = Router();
 
@@ -15,5 +20,8 @@ router.post(
 );
 //advertisement
 router.get("/newAdvertisement", newAdvertisement);
+router.get("/acceptAdvertisement", AcceptAdvertisement);
+router.get("/rejectedAdvertisement", RejectedAdvertisement);
+router.get("/reviewAdvertisement", ReviewAdvertisement);
 
 export default router;

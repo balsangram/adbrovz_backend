@@ -17,6 +17,7 @@ export const createPromotion = async (req, res, next) => {
       lat_long,
       location_name,
       pincode,
+      advertisement_type,
     } = req.body;
 
     console.log(req.body, "body");
@@ -38,6 +39,7 @@ export const createPromotion = async (req, res, next) => {
       lat_long: lat_long || "",
       location_name: location_name || "",
       pincode: pincode || "",
+      advertisement_type: advertisement_type || "",
     });
 
     res.status(201).json({

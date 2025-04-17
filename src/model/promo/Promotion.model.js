@@ -37,7 +37,6 @@ const promotionSchema = new Schema(
       enum: ["Accept", "Reject", "Review", ""],
       default: "",
     },
-    
 
     // request_status: {
     //   type: Number,
