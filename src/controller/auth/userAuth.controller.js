@@ -121,10 +121,36 @@ export const checkPhoneNo = async (req, res, next) => {
     }
     const isPhoneNo = await User.findOne({ phone });
     if (isPhoneNo) {
-      res.status(200).json({ message: "already store" });
+      res.status(200).json({ message: "already store" ,exists :true});
     } else {
-      res.status(404).json({ message: "not found" });
+      res.status(404).json({ message: "not found" ,exists: false});
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const displayAllUser = async (req, res, next) => {
+  try {
+    const allUser = await User.find();
+    res.status(200).json({ message: "all users are", allUser });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const profile = async (req, res, next) => {
+  try {
+    const { id } = req.params; // Fix typo: "parms" → "params"
+    const profile = await User.findById(id); // Prefer `findById` for MongoDB ObjectId
+
+    if (!profile) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Profile retrieved successfully.", profile });
   } catch (error) {
     next(error);
   }

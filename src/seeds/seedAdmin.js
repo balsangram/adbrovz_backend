@@ -22,6 +22,8 @@ const seedAdmin = async () => {
       type: "admin",
       email: "admin@adbrovz.com",
       phone: "1234567890",
+      chatnumber : "918884745611",
+      email:"adb",
       password: hashedPassword,
       is_agency: 0,
       sub_type: 0,
