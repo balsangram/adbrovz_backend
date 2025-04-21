@@ -1,4 +1,5 @@
 import AppIcon from "../../model/admin/appIcon.model.js";
+import Promotion from "../../model/promo/Promotion.model.js";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary.js";
 
 export const ResetLoginPIN = async (req, res, next) => {
@@ -53,3 +54,34 @@ export const displayappIcons = async (req, res, next) => {
     next(error);
   }
 };
+
+// export const advertisementRequest = async (req, res) => {
+//   try {
+//     const currentAdminId = req.user.id;
+
+//     // Get all promotions not created by this admin and not approved
+//     const promotions = await Promotion.find({
+//       requested_by: { $ne: currentAdminId },
+//       request_status: { $ne: "approved" },
+//     })
+//       .populate("requested_by") // equivalent to with('user')
+//       .sort({ updatedAt: -1 });
+
+//     const req_count = promotions.filter(
+//       (promo) => promo.request_status === "pending"
+//     ).length;
+
+//     const deleted_count = promotions.filter(
+//       (promo) => promo.request_status === "delete"
+//     ).length;
+
+//     res.status(200).json({
+//       advertise_reqs: promotions,
+//       req_count,
+//       deleted_count,
+//     });
+//   } catch (error) {
+//     console.error("Error fetching advertisement requests:", error);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// };

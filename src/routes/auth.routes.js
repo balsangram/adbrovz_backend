@@ -9,6 +9,7 @@ import {
   ResetLoginPIN,
 } from "../controller/auth/addminFunctionality.controller.js";
 import upload from "../middleware/multer.middleware.js";
+import { verifyToken } from "../middleware/authToken.midleware.js";
 
 const router = Router();
 
@@ -18,6 +19,7 @@ router.post("/login", adminLogin);
 
 router.post(
   "/addAllImages",
+
   upload.fields([
     { name: "promo_img", maxCount: 1 },
     { name: "bazaar_img", maxCount: 1 },
@@ -27,9 +29,10 @@ router.post(
   addAppIcons
 );
 
-
-router.get("/displayAllIcons", displayappIcons);
+router.get("/displayAllIcons", verifyToken, displayappIcons);
 
 router.post("/reset_login_PIN", ResetLoginPIN);
+
+// router.get("/advertisement-requests", verifyToken, advertisementRequest);
 
 export default router;

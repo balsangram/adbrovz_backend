@@ -1,28 +1,21 @@
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../config";
+import dotenv from "dotenv";
+dotenv.config(); // Load environment variables
 
-const verifyToken = (req, res, next) => {
+export const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  // Check if token exists
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res
-      .status(401)
-      .json({ message: "Unauthorized. Token missing or invalid." });
+    return res.status(401).json({ message: "Access token missing or malformed" });
   }
 
   const token = authHeader.split(" ")[1];
 
   try {
-    // Verify the token using your secret key
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded; // Attach user info to the request
-    next(); // Move to next middleware or route
-  } catch (error) {
-    return res
-      .status(403)
-      .json({ message: "Forbidden. Invalid or expired token." });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Ensure this env var exists
+    req.user = decoded; // Attach user info to request
+    next(); // Move to next middleware/controller
+  } catch (err) {
+    return res.status(401).json({ message: "Invalid or expired token" });
   }
 };
-
-module.exports = verifyToken;
