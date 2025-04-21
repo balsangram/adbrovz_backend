@@ -42,3 +42,4 @@ router.post(
   drafPromotion
 );
 export default router;
+
